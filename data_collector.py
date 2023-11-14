@@ -1,9 +1,8 @@
 import json
 import csv 
 import requests
-from datetime import datetime, timedelta
 
-def get_articles(n, apiKey):
+def get_articles(n,apiKey):
 
     # Define the NewsAPI URL
     url = 'https://newsapi.org/v2/everything'
@@ -12,7 +11,7 @@ def get_articles(n, apiKey):
     params = {
         'apiKey': apiKey,
         'language': 'en',
-        'q' : "Taylor Swift OR Eras Tour OR Eras tour movie",
+        'q' : "Taylor Swift",
     }
 
     # Send the API request
@@ -21,7 +20,22 @@ def get_articles(n, apiKey):
     if response.status_code == 200:
         data = response.json()
         articles = data.get('articles', [])
-        return articles
+        return articles[:n]
     else:
         print(f"Failed to fetch news. Status code: {response.status_code}")
         return []
+    
+#Need the title, content, date published
+def article_to_tsv(apiKey):
+
+    articles = get_articles(500,apiKey)
+
+    with open("taylor.tsv",'w', newline = '', encoding = 'utf-8') as tsv_file:
+        writer = csv.writer(tsv_file, delimiter = '\t')
+
+        writer.writerow(['Title','Content','Publish Date'])
+        
+        for article in articles:
+             writer.writerow([article['title'], article['content'], article['publishedAt']])
+
+article_to_tsv('3c3c117c4f2f4fffa6bcf4f877544e2a')
