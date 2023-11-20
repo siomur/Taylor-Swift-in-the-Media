@@ -2,7 +2,7 @@ import json
 import csv 
 import requests
 
-def get_articles(n,apiKey):
+def get_articles(n, apiKey, from_date, to_date):
 
     # Define the NewsAPI URL
     url = 'https://newsapi.org/v2/everything'
@@ -12,6 +12,9 @@ def get_articles(n,apiKey):
         'apiKey': apiKey,
         'language': 'en',
         'q' : "Taylor Swift",
+        'sortBy' : 'relevancy',
+        'from' : from_date,
+        'to' : to_date
     }
 
     # Send the API request
@@ -26,16 +29,26 @@ def get_articles(n,apiKey):
         return []
     
 #Need the title, content, date published
-def article_to_tsv(apiKey):
+def article_to_tsv(apiKey, from_date, to_date):
 
-    articles = get_articles(500,apiKey)
+    articles = get_articles(100,apiKey, from_date, to_date)
 
-    with open("taylor.tsv",'w', newline = '', encoding = 'utf-8') as tsv_file:
+    with open("taylor.tsv",'a', newline = '', encoding = 'utf-8') as tsv_file:
         writer = csv.writer(tsv_file, delimiter = '\t')
-
-        writer.writerow(['Title','Content','Publish Date'])
         
         for article in articles:
              writer.writerow([article['title'], article['content'], article['publishedAt']])
 
-article_to_tsv('3c3c117c4f2f4fffa6bcf4f877544e2a')
+
+
+if __name__ == "__main__":
+
+    with open("taylor.tsv",'w', newline = '', encoding = 'utf-8') as tsv_file:
+        writer = csv.writer(tsv_file, delimiter = '\t')
+        writer.writerow(['Title','Content','Publish Date'])
+
+    article_to_tsv('3c3c117c4f2f4fffa6bcf4f877544e2a', "2023-10-20", "2023-10-25")
+    article_to_tsv('3c3c117c4f2f4fffa6bcf4f877544e2a', "2023-10-25", "2023-10-30")
+    article_to_tsv('3c3c117c4f2f4fffa6bcf4f877544e2a', "2023-10-30", "2023-11-05")
+    article_to_tsv('3c3c117c4f2f4fffa6bcf4f877544e2a', "2023-11-05", "2023-11-10")
+    article_to_tsv('3c3c117c4f2f4fffa6bcf4f877544e2a', "2023-11-10", "2023-11-15")
