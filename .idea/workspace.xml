@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3aebd8d2-aa35-40e7-a255-5f534a3a99f4" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="database.data.extractors.current.export.id" value="Tab-separated (TSV)_id" />
+    <property name="database.data.extractors.current.id" value="Tab-separated (TSV)_id" />
+    <property name="grid.search.filter.rows" value="true" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>
