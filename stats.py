@@ -80,4 +80,54 @@ def tfidf_to_json(n,input_file):
     #dumping into the stdout stream
     json.dump(highest_tfidf_by_speaker, sys.stdout, indent=2)
 
-tfidf_to_json(10,"output.json")
+#tfidf_to_json(10,"output.json")
+
+def sentiment_percent(filename):
+
+    df = pd.read_csv(filename, sep = '\t')
+
+    sentiment_count = df["Sentiment"].value_counts()
+
+    total_entries = len(df)
+    percentage_positive = (sentiment_count.get('P', 0) / total_entries) * 100
+    percentage_negative = (sentiment_count.get('N', 0) / total_entries) * 100
+    percentage_neutral = (sentiment_count.get('-', 0) / total_entries) * 100
+
+    # Print the percentages
+    print(f'Percentage Positive: {percentage_positive:.2f}%')
+    print(f'Percentage Negative: {percentage_negative:.2f}%')
+    print(f'Percentage Neutral: {percentage_neutral:.2f}%')
+
+#sentiment_percent("taylor.tsv")
+
+def cat_percent(filename):
+
+    df = pd.read_csv(filename, sep = '\t')
+
+    sentiment_count = df["Category"].value_counts()
+
+    total_entries = len(df)
+    cat1 = (sentiment_count.get('1', 0) / total_entries) * 100
+    cat2 = (sentiment_count.get('2', 0) / total_entries) * 100
+    cat3 = (sentiment_count.get('3', 0) / total_entries) * 100
+    cat4 = (sentiment_count.get('4', 0) / total_entries) * 100
+    cat5 = (sentiment_count.get('5', 0) / total_entries) * 100
+    cat6 = (sentiment_count.get('6', 0) / total_entries) * 100
+    cat7 = (sentiment_count.get('7', 0) / total_entries) * 100
+    cat8 = (sentiment_count.get('8', 0) / total_entries) * 100
+    null = (sentiment_count.get('-', 0) / total_entries) * 100
+    
+
+    # Print the percentages
+    print(f'Percentage cat1: {cat1:.2f}%')
+    print(f'Percentage cat2: {cat2:.2f}%')
+    print(f'Percentage cat3: {cat3:.2f}%')
+    print(f'Percentage cat4: {cat4:.2f}%')
+    print(f'Percentage cat5: {cat5:.2f}%')
+    print(f'Percentage cat6: {cat6:.2f}%')
+    print(f'Percentage cat7: {cat7:.2f}%')
+    print(f'Percentage cat8: {cat8:.2f}%')
+    print(f'Percentage null: {null:.2f}%')
+
+cat_percent("taylor.tsv")
+     
