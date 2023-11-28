@@ -33,7 +33,7 @@ def categories_chart():
 
 
 def main():
-    sentiment_chart()
+    #sentiment_chart()
     categories_chart()
 
 if __name__ == "__main__":
