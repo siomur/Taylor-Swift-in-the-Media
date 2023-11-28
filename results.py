@@ -14,7 +14,7 @@ def sentiment_chart():
     plt.figure(figsize=(8, 8))
     plt.pie(sentiment_counts, labels=sentiment_counts.index, autopct='%1.1f%%', startangle=140)
     plt.title('Sentiment Distribution of Articles about Taylor Swift', fontweight='bold')
-    plt.show()
+    #plt.show()
     plt.savefig('sentiment_pie_chart.pdf')
 
 
@@ -28,7 +28,7 @@ def categories_chart():
    # autoct makes sure the percentages are shown, startangle=140 is a stylistic element -- not necessary
    plt.pie(categories_counts, labels=categories_counts.index, autopct='%1.1f%%', startangle=140)
    plt.title('Category Distribution of the Articles about Taylor Swift', fontweight='bold')
-   plt.show()
+   #plt.show()
    plt.savefig('category_pie_chart.pdf')
 
 
