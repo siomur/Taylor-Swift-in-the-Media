@@ -78,9 +78,10 @@ def tfidf_to_json(n,input_file):
 
     highest_tfidf_by_speaker = {character: dict(Counter(character_data).most_common(n)) for character, character_data in speaker_dict.items()}
     #dumping into the stdout stream
-    json.dump(highest_tfidf_by_speaker, sys.stdout, indent=2)
+    with open('tfidf.json', 'w') as file:
+        json.dump(highest_tfidf_by_speaker, file)
 
-#tfidf_to_json(10,"output.json")
+tfidf_to_json(10,"output.json")
 
 def sentiment_percent(filename):
 
@@ -129,5 +130,5 @@ def cat_percent(filename):
     print(f'Percentage cat8: {cat8:.2f}%')
     print(f'Percentage null: {null:.2f}%')
 
-cat_percent("taylor.tsv")
+#cat_percent("taylor.tsv")
      
