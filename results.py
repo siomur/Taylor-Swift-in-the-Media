@@ -8,6 +8,7 @@ def sentiment_chart():
     # Change labels from P, N, - to positive, negative, neutral
     df['Sentiment'] = df['Sentiment'].map({'P': 'Positive', 'N': 'Negative', '-': 'Neutral'})
     df = df[df['Category'] != '-']
+    
     # Count the number of articles for each sentiment
     sentiment_counts = df['Sentiment'].value_counts()
 
@@ -22,6 +23,8 @@ def categories_chart():
    # make pie chart with the types of categories
    df = pd.read_csv("full_categories_taylor.tsv", sep="\t") 
    df = df[df['Category'] != '-']
+   df['Category'] = df['Category'].map({'Albums & Songs':'Albums & Songs', 'Awards/Award Shows & Records':'Awards/Records', 'Style/Looks': 'Style/Looks', 'Taylor Swift: The Eras Tour Movie':'The Eras Tour Movie', 'Relationship with Travis Kelce & the NFL':'Travis Kelce & the NFL', 'Taylor Swift personal life (activities with friends & friendships & past)':'Personal Life', 'Billionaire Status':'Billionaire Status', 'Performances/Eras Tour':'Performances/Eras Tour'})
+
    categories_counts = df['Category'].value_counts()
 
    plt.figure(figsize=(8, 8))
@@ -46,6 +49,7 @@ def sentiment_in_categories():
                        color='red', label='Negative')
    bars_neu = plt.bar(sentiment_percentages.index, sentiment_percentages['Neutral'],
                        bottom=sentiment_percentages['Positive'] + sentiment_percentages['Negative'], color='grey', label='Neutral')
+   
 
   
    plt.xticks(sentiment_percentages.index, [label.replace(" ", "\n") for label in sentiment_percentages.index])
