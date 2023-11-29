@@ -38,6 +38,7 @@ def sentiment_in_categories():
    df['Sentiment'] = df['Sentiment'].map({'P': 'Positive', 'N': 'Negative', '-':'Neutral'})
    #exclude irrelevant characters
    df = df[df['Category'] != '-']
+   df['Category'] = df['Category'].map({'Albums & Songs':'Albums & Songs', 'Awards/Award Shows & Records':'Awards/Records', 'Style/Looks': 'Style/Looks', 'Taylor Swift: The Eras Tour Movie':'The Eras Tour Movie', 'Relationship with Travis Kelce & the NFL':'Travis Kelce & the NFL', 'Taylor Swift personal life (activities with friends & friendships & past)':'Personal Life', 'Billionaire Status':'Billionaire Status', 'Performances/Eras Tour':'Performances/Eras Tour'})
    sentiment_percentages = pd.crosstab(df['Category'], df['Sentiment'], normalize='index') * 100
 
    plt.figure(figsize=(9, 6))
@@ -55,7 +56,7 @@ def sentiment_in_categories():
    plt.title('Sentiment Distribution by Category')
    plt.legend(title='Sentiment')
 
-   #plt.show()
+   plt.show()
    plt.savefig("sentiment_per_category.pdf")
 
 
