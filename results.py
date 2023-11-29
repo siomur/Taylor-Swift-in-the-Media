@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 
 def sentiment_chart():
@@ -31,10 +32,39 @@ def categories_chart():
    #plt.show()
    plt.savefig('category_pie_chart.pdf')
 
+def sentiment_in_categories():
+   df = pd.read_csv("full_categories_taylor.tsv", sep="\t") 
+   # Map 'P' to 'Positive' and 'N' to 'Negative' in the 'sentiment' column
+   df['Sentiment'] = df['Sentiment'].map({'P': 'Positive', 'N': 'Negative', '-':'Neutral'})
+   #exclude irrelevant characters
+   df = df[df['Category'] != '-']
+   sentiment_percentages = pd.crosstab(df['Category'], df['Sentiment'], normalize='index') * 100
+
+   plt.figure(figsize=(9, 6))
+   bars_pos = plt.bar(sentiment_percentages.index, sentiment_percentages['Positive'], color='green', label='Positive')
+   bars_neg = plt.bar(sentiment_percentages.index, sentiment_percentages['Negative'], bottom=sentiment_percentages['Positive'],
+                       color='red', label='Negative')
+   bars_neu = plt.bar(sentiment_percentages.index, sentiment_percentages['Neutral'],
+                       bottom=sentiment_percentages['Positive'] + sentiment_percentages['Negative'], color='grey', label='Neutral')
+
+  
+   plt.xticks(sentiment_percentages.index, [label.replace(" ", "\n") for label in sentiment_percentages.index])
+
+   plt.xlabel('Category')
+   plt.ylabel('Percentage')
+   plt.title('Sentiment Distribution by Category')
+   plt.legend(title='Sentiment')
+
+   #plt.show()
+   plt.savefig("sentiment_per_category.pdf")
+
+
+
 
 def main():
     sentiment_chart()
     categories_chart()
+    sentiment_in_categories()
 
 if __name__ == "__main__":
     main()
